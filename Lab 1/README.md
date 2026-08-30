@@ -2,7 +2,7 @@
 
 _This project is to be done in teams of 2._
 
-**COLLABORATORS:** Ammar Syed, Stephan Monahan
+**COLLABORATORS:** Ammar Syed, Stephen Monahan
 
 **THE MASTERWORK YOU DREW FROM THE HAT:** The lightsaber — *Star Wars* (1977).
 _"Identity and threat carried in a blade of light and hum."_
