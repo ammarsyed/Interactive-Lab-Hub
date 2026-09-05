@@ -406,6 +406,9 @@ prototype are great too.**
 Video:
 https://drive.google.com/file/d/1-G9FCid3b6FPjuvDeIvaTVLTCuE5MY0n/view?usp=sharing
 
+Prototype photo:
+![Prototype (Part 2)](images/Prototype_Part2.jpeg)
+
 
 
 ---
