@@ -158,6 +158,14 @@ You can look in `image.py` for an example of how to display an image on the scre
 
 \*\*\***Include a picture of your own Raspberry Pi displaying the piscreen.service with your unique MAC address. Additionally, please provide another picture showing the successful completion of the screen test.**\*\*\*
 
+### Pi displaying piscreen.service
+
+![Raspberry Pi 5 with MiniPiTFT showing IP, network, and MAC address](images/piscreen-mac.jpeg)
+
+### Screen test
+
+![MiniPiTFT filled with a user-chosen color while button B is pressed](images/screen-test.jpeg)
+
 
 ## Part D. 
 ### Set up the Display Clock Demo
@@ -193,6 +201,8 @@ We strongly discourage literal digital or analog clock display: Be creative.
 
 
 ** Insert ideas, sketches, [Verplank diagrams](https://ccrma.stanford.edu/courses/250a-fall-2004/IDSketchbok.pdf)), storyboards for your ideas **
+
+![Day Hourglass storyboard](images/part-e-storyboard.jpeg)
 
 
 
