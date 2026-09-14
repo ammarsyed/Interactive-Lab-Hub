@@ -204,7 +204,7 @@ We strongly discourage literal digital or analog clock display: Be creative.
 
 ![Day Hourglass storyboard](images/part-e-storyboard.jpeg)
 
-
+- The idea is to display an hour glass with the time remaining for the rest of the day, and it resets at the end. This is a digital version of the olden way of showing or keeping time. It will be cool to see the time limit set for how long it actually takes to empty out the hourglass. Something to update would be to show how many iterations of the hourglass have happened already. 
 
 **Put the names of the people you gave feedback to here. (Even better, add links to their repos here!)**
 
