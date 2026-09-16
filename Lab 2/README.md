@@ -205,8 +205,15 @@ We strongly discourage literal digital or analog clock display: Be creative.
 ![Day Hourglass storyboard](images/part-e-storyboard.jpeg)
 
 
-
 **Put the names of the people you gave feedback to here. (Even better, add links to their repos here!)**
+Nishant Ray : https://github.com/Nishant-Ray/Interactive-Lab-Hub/tree/Fall2026/Lab%202
+I like the idea of using an hourglass as a way to represent time. It’s something that everyone is familiar with so it’s very intuitive and gives a clear visual sense of time passing. Though I would say I always personally found hourglasses to be a little ambiguous in regard to how much time is left for it to finish ticking. I’d be interested in seeing how you could make the concept feel a little more unique or personal beyond a traditional hourglass.
+
+Ani Hadagali: https://github.com/anihadagali7/Interactive-Lab-Hub/blob/anihadagali7-Aug26-Lab/Lab%202/README.md
+The idea is to display an hour glass with the time remaining for the rest of the day, and it resets at the end. This is a digital version of the olden way of showing or keeping time. It will be cool to see the time limit set for how long it actually takes to empty out the hourglass. Something to update would be to show how many iterations of the hourglass have happened already.
+
+Stephen Monahan: https://github.com/stephen4513/Interactive-Lab-Hub/tree/Fall2026/Lab%202
+
 
 # Lab 2 Part 2
 
