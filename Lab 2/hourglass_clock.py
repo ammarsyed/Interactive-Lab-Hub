@@ -114,12 +114,21 @@ while True:
 
     hrs_left = int(frac_left * 24)
     mins_left = int(frac_left * 1440) % 60
-    draw.text((4, 1), time.strftime("%H:%M:%S"), font=font, fill="#FFFFFF")
+    if PERIOD >= 86400.0:
+        clock = time.strftime("%H:%M:%S")
+    else:
+        # In demo mode the sand runs on a compressed day, so show the simulated
+        # time of day instead of the wall clock - otherwise the two disagree.
+        sim = int((1.0 - frac_left) * 86400)
+        clock = "%02d:%02d:%02d" % (sim // 3600, (sim % 3600) // 60, sim % 60)
+    draw.text((4, 1), clock, font=font, fill="#FFFFFF")
     label = "%dh %dm left" % (hrs_left, mins_left)
     draw.text((width - 4 - draw.textlength(label, font=font), 1),
               label, font=font, fill=color)
 
-    status = "PAUSED  -  B to resume" if paused else "A to pause"
+    status = "PAUSED - B resumes" if paused else "A to pause"
+    if PERIOD < 86400.0:
+        status += "  [%ds=1day]" % int(PERIOD)
     draw.text((4, BOTY + 2), status, font=small, fill=GLASS)
 
     disp.image(image, rotation)
