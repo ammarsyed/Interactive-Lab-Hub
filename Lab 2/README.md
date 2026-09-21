@@ -1,5 +1,5 @@
 # Interactive Prototyping: The Clock of Pi
-**NAMES OF COLLABORATORS HERE**
+**Ammar Syed and Dhanu Ravichandiran**
 
 Does it feel like time is moving strangely during this semester?
 
@@ -207,12 +207,13 @@ We strongly discourage literal digital or analog clock display: Be creative.
 
 **Put the names of the people you gave feedback to here. (Even better, add links to their repos here!)**
 Nishant Ray : https://github.com/Nishant-Ray/Interactive-Lab-Hub/tree/Fall2026/Lab%202
-I like the idea of using an hourglass as a way to represent time. It’s something that everyone is familiar with so it’s very intuitive and gives a clear visual sense of time passing. Though I would say I always personally found hourglasses to be a little ambiguous in regard to how much time is left for it to finish ticking. I’d be interested in seeing how you could make the concept feel a little more unique or personal beyond a traditional hourglass.
+
 
 Ani Hadagali: https://github.com/anihadagali7/Interactive-Lab-Hub/blob/anihadagali7-Aug26-Lab/Lab%202/README.md
-The idea is to display an hour glass with the time remaining for the rest of the day, and it resets at the end. This is a digital version of the olden way of showing or keeping time. It will be cool to see the time limit set for how long it actually takes to empty out the hourglass. Something to update would be to show how many iterations of the hourglass have happened already.
+
 
 Stephen Monahan: https://github.com/stephen4513/Interactive-Lab-Hub/tree/Fall2026/Lab%202
+
 
 
 # Lab 2 Part 2
@@ -223,6 +224,14 @@ Stephen Monahan: https://github.com/stephen4513/Interactive-Lab-Hub/tree/Fall202
 
 2. Look at and give feedback on the Part E. for at least 3 other people in the class and get 3 people to comment on your Part E!)
 **Put the feedback for your ideas here.**
+
+Nishant Ray : I like the idea of using an hourglass as a way to represent time. It’s something that everyone is familiar with so it’s very intuitive and gives a clear visual sense of time passing. Though I would say I always personally found hourglasses to be a little ambiguous in regard to how much time is left for it to finish ticking. I’d be interested in seeing how you could make the concept feel a little more unique or personal beyond a traditional hourglass.
+
+Ani Hadagali : The idea is to display an hour glass with the time remaining for the rest of the day, and it resets at the end. This is a digital version of the olden way of showing or keeping time. It will be cool to see the time limit set for how long it actually takes to empty out the hourglass. Something to update would be to show how many iterations of the hourglass have happened already.
+
+Stephen Monahan : I like the hourglass idea and how the buttons let you pause and resume it, making it more interactive. The storyboard makes the sequence easy to follow. One suggestion would be to have the hourglass or background change color when the sand runs out, so it’s clear when the timer is finished.
+
+
 
 ## Update your Lab Hub
 
