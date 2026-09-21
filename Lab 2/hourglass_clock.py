@@ -128,7 +128,8 @@ while True:
 
     status = "PAUSED - B resumes" if paused else "A to pause"
     if PERIOD < 86400.0:
-        status += "  [%ds=1day]" % int(PERIOD)
+        # e.g. a 60s period means one real minute stands in for a whole day
+        status += "  [%gmin = 1 day]" % (PERIOD / 60.0)
     draw.text((4, BOTY + 2), status, font=small, fill=GLASS)
 
     disp.image(image, rotation)
