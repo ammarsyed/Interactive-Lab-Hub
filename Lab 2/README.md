@@ -241,11 +241,25 @@ Stephen Monahan : I like the hourglass idea and how the buttons let you pause an
 
 Start small, pick just one element of your overall idea, just to show you have a handle on the code and components.
 
+For the first pass I took just one element of the Day Hourglass idea: the sand level. The
+clock redraws the barebones time display as an hourglass whose sand shows how much of today
+is left, so the top chamber empties and the bottom fills as the day goes on. The sand is
+sized by area rather than height, so it drains at an even rate.
+
 \*\*\***Put a copy of your code in your Lab 2 Github repo.**\*\*\*
+
+Code: [hourglass_simple.py](hourglass_simple.py)
 
 ## Make a short video of your modified barebones PiClock
 
 \*\*\***Take a video of your barely modified PiClock.**\*\*\*
+
+[Video: the barely modified PiClock](https://drive.google.com/file/d/1EnE9uMs_biu0ExYUDs4ixqsgXlIUisZm/view?usp=sharing)
+
+Filmed at 23:47, about twelve minutes before midnight, which is why the top chamber is
+nearly empty and almost all of the sand has already collected in the bottom. In this version
+the hourglass runs on the real day, so over thirteen seconds of video only the clock digits
+visibly change.
 
 After you edit and work on the scripts for Lab 2, the files should be upload back to your own GitHub repo! You can push to your personal github repo by adding the files here, commiting and pushing.
 
@@ -263,13 +277,40 @@ Do take advantage of having done the previous iteration to refine and simplify y
 
 ** Insert any updates ideas, sketches, [Verplank diagrams](https://ccrma.stanford.edu/courses/250a-fall-2004/IDSketchbok.pdf))!, storyboards for your ideas **
 
+The storyboard from Part E still describes the design:
+
+![Day Hourglass storyboard](images/part-e-storyboard.jpeg)
+
+The first video showed the sand level but was completely passive. The second video/refinement adds the
+interaction the storyboard shows: the top button pauses the sand and the bottom button
+resumes it, so you can hold the day still instead of only watching it drain. Paused sand turns
+grey and the screen says paused. A trickle at the neck was also added, since without it a slow moving
+hourglass is hard to read as running at all.
 
 \*\*\***Put a copy of your code in your Lab 2 Github repo.**\*\*\*
+
+Code: [hourglass_clock.py](hourglass_clock.py)
 
 \*\*\***Take a video of your PiClock.**\*\*\*
 
 
+[Video: the Day Hourglass with pause and resume](https://drive.google.com/file/d/1oJJOId5s6_vJ3yt3Kj2MboguXvIoVDpm/view?usp=sharing)
+
+The clock runs 1:1 with the real day: one full emptying of the hourglass is 24 hours, and it
+resets at midnight. That is too slow to see on camera, so this video was recorded with the script "sped up", where two real minutes stand in for one day. Everything else, including the buttons, behaves exactly as it does at normal speed.
+
+```
+python hourglass_clock.py        # normal: one emptying per day
+python hourglass_clock.py 120    # timelapsed for filming
+```
+
+
 As always, make sure you document contributions and ideas from others (and AI) explicitly in your writeup.
+
+### Contributions
+
+I used Claude to help with the python code/scripts ( `hourglass_simple.py` and `hourglass_clock.py`). Those that gave feedback helped to refine the final video ideas in the end. 
+
 
 You are permitted (but not required) to work in groups and share a turn in; you are expected to make equal contribution on any group work you do, and N people's group project should look like N times the work of a single person's lab.  Make sure the page for the group turn in is linked to your personal Interactive Lab Hub page. 
 
