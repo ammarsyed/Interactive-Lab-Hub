@@ -133,7 +133,18 @@ Available sizes, smallest first: `tiny.en`, `base.en`, `small.en`, `medium.en`. 
 
 \*\***Record a few seconds of your own speech (`arecord -d 5 -f cd -c 1 -r 16000 test.wav`) and transcribe it with at least two model sizes. Report the real-time factor for each. At what point does the accuracy improvement stop being worth the delay, for a system that has to answer you?**\*\*
 
+On my 5-second recording, tiny.en had a real-time factor of 0.20x (0.99 s, heard "a mar"), base.en was 0.39x (1.94 s, heard "Amara"), and small.en was 1.09x (5.45 s, the only one that got "Ammar" right).
+
+When the system needs to respond to you, the accuracy stops being worth it at around base.en. small.en got it right but it took a big pause of more than 5 seconds to do that before a reply and that's not real time enough for most use cases. It's better to use maybe base.en and fix errors and stuff. 
+
+
 \*\***Write your own script that verbally asks for a numerical input (a phone number, zipcode, number of pets) and records the answer the respondent provides.**\*\* Numbers are a good stress test — transcription systems make characteristic errors on digit strings, and you will want to know what they are before you design around them.
+
+Model: base.en (1.5 s silence cutoff)
+Question: "Say your phone number, zip code, and number of pets."
+Transcript: "50, 826, 1879, 1121, number pets is zero."
+Transcription time: 2.31 s
+
 
 ## C. Turn-taking: knowing when someone has stopped talking
 
@@ -157,9 +168,13 @@ Speak, pause, and watch it transcribe. Now change the endpointing threshold — 
 
 There is no correct value. A system that takes drink orders and a system that listens to someone think out loud want very different thresholds, and the right one depends on what your users are doing with their pauses.
 
+At 0.2 seconds, the system cut my voice short. I said "i'd like a coffee um wihth oat milk and acutally to make it a large" but it only captured "with oat milk and actually make it a large." Pauses and filler words were treated as the end of my turn. At 1.5s it captured the entire sentence but I had to wait for a bit in silence afterwards. This made be a bit unsure on whether I was done or what the status was. In between at 0.6 seconds it caught my sentence and replied much quicker. 
+
 ### The complete loop
 
 `echo_bot.py` puts the pieces together: it listens, endpoints, transcribes, and speaks a reply through Piper. The dialogue policy is deliberately trivial — it repeats what you said — so that everything you notice is a property of the timing rather than the content.
+
+
 
 ```
 (.venv) $ python echo_bot.py
