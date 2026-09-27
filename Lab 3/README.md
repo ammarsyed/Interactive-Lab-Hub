@@ -140,6 +140,8 @@ When the system needs to respond to you, the accuracy stops being worth it at ar
 
 \*\***Write your own script that verbally asks for a numerical input (a phone number, zipcode, number of pets) and records the answer the respondent provides.**\*\* Numbers are a good stress test — transcription systems make characteristic errors on digit strings, and you will want to know what they are before you design around them.
 
+Script: [speech-scripts/ask_number.py](speech-scripts/ask_number.py)
+
 Model: base.en (1.5 s silence cutoff)
 Question: "Say your phone number, zip code, and number of pets."
 Transcript: "50, 826, 1879, 1121, number pets is zero."
@@ -168,7 +170,7 @@ Speak, pause, and watch it transcribe. Now change the endpointing threshold — 
 
 There is no correct value. A system that takes drink orders and a system that listens to someone think out loud want very different thresholds, and the right one depends on what your users are doing with their pauses.
 
-At 0.2 seconds, the system cut my voice short. I said "i'd like a coffee um wihth oat milk and acutally to make it a large" but it only captured "with oat milk and actually make it a large." Pauses and filler words were treated as the end of my turn. At 1.5s it captured the entire sentence but I had to wait for a bit in silence afterwards. This made be a bit unsure on whether I was done or what the status was. In between at 0.6 seconds it caught my sentence and replied much quicker. 
+At 0.2 seconds, the system cut my voice short. I said "i'd like a coffee um wihth oat milk and acutally to make it a large" but it only captured "with oat milk and actually make it a large." Pauses and filler words were treated as the end of my turn. At 1.5s it captured the entire sentence but I had to wait for a bit in silence afterwards. The 1.5s made be a bit unsure on whether I was done or what the status was. In between at 0.6 seconds it caught my sentence and replied much quicker. 
 
 ### The complete loop
 
