@@ -160,6 +160,9 @@ The copper tape is on the lid and the servo arm is mounted right next to it, so 
 - What changes when you adjust the sensor placement or servo motion?<br>
 What changes is that the smaller the hand the easier it stays upright rather than being floppy. Also the speed is fast but not fast enough to hurt. It's fast enough to react and immediately hit someone if they touch the jar but not fast enough to hurt them.
 
+<img width="3314" height="2486" alt="IMG_7874" src="media/partE_interaction_diagram.jpg" />
+
+
 
 [▶ Lid Slapper demo video](media/partE_demo.mov)
 ---
