@@ -141,6 +141,10 @@ What changes is that the smaller the hand the easier it stays upright rather tha
 
 [▶ Lid Slapper demo video](media/partE_demo.mov)
 
+#### Reflection
+
+The code was fairly easy and reading a touch/moving a servo was simple. The challenging part was connecting the wires and sensors to the actual hardware. A challenging thing was that I kind of broke the Mini PiTFT cable hole, but it's not a big deal because I was able to use the pHAT instead. Regardless, it was really cool to see how physical stuff can change/be affected and how it makes the situation feel. It was pretty fun to see the escalation of how mad the thing got when people tried again. Overall, connecting sensing, movement, and physical form itself isn't too hard but thinking about how to connect them together and use them creatively to achieve a purpose or feeling to others is the hard part and thinking about the inputs and outputs of the system was a bit challenging but fun.
+
 ---
 
 ### Part F
