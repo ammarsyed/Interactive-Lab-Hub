@@ -1,27 +1,8 @@
 # Ph-UI!!!
 
-<details>
-	<summary><strong>Instructions for Students (Click to Expand)</strong></summary>
-  
-	**Submission Cleanup Reminder:**
-	- This README.md contains extra instructional text for guidance.
-	- Before submitting, remove all instructional text and example prompts from this file.
-	- You may delete these sections or use the toggle/hide feature in VS Code to collapse them for a cleaner look.
-	- Your final submission should be neat, focused on your own work, and easy to read for grading.
-  
-	This helps ensure your README.md is clear, professional, and uniquely yours!
-</details>
-
----
-
----
-
 ## Lab Overview
 Members: [Neeha Ravula](https://github.com/neeharavula/Interactive-Lab-Hub/tree/Fall2026) (nr485), [Gaurav Patel](https://github.com/Gtpatel02/Interactive-Lab-Hub) (gp438), [Nishant Ray](https://github.com/Nishant-Ray/Interactive-Lab-Hub) (nr487), [Ammar Syed](https://github.com/ammarsyed/Interactive-Lab-Hub) (as4422) <br>
 Project name: No Cookies For You
-
-
-For lab this week, we focus on both sensing and actuation, bringing new modes of input and output into your devices, while also prototyping the physical structure and overall look of the device. You will consider how the physical form supports sensing and actuation, and how these elements come together to shape the interaction and aesthetics of the device.
 
 ---
 
@@ -93,6 +74,7 @@ Distance Test:
 Pi Servo Hat Test:
 
 [▶ Servo test video](media/partC_servo_test.mov)
+
 <img width="204" height="153" alt="Screenshot 2026-10-18 at 9 10 31 PM" src="media/partC_servo_screenshot.png" />
 
 ---
@@ -100,10 +82,9 @@ Pi Servo Hat Test:
 ### Part D
 ### Physical Interaction Design: Feast Automata
 
-**\*\*\*Draw 5 sketches that explore different physical arrangements for your sensing and actuation.\*\*\***
-<img width="3969" height="2341" alt="IMG_7786" src="media/partD_sketches.jpg" />
+#### Sketches
 
-**\*\*\*What questions do these sketches raise? What do you need to physically prototype to answer them?\*\*\***
+<img width="3969" height="2341" alt="IMG_7786" src="media/partD_sketches.jpg" />
 
 #### Questions:
 1. Can the capacitive sensor detect a touch through copper tape on a lid that’s handled constantly, or will normal jar handling cause false triggers?
@@ -120,22 +101,18 @@ Pi Servo Hat Test:
 - Cardboard faces and signs
 - Physically move the prototype ourselves
 
+#### Chosen Design
 
-**\*\*\*Pick one design to prototype and explain why.\*\*\*** <br>
 We have decided to choose the first design, Don't Touch Lid Slapper.
 We chose this because first off, the capacitive touch on the lid is the most direct trigger, since you have to touch the lid to open the jar. It is also pretty funny and it is very easy to see what it is trying to do, keep you healthier so you don't eat cookies. Also we can fit everything under the jar so it is easy to keep hidden and act like it's a normal jar even if it is not.
 
-Build a cardboard or other low-fidelity physical prototype of your design.
-
-**\*\*\*Document your rough prototype with photos and/or video.\*\*\***
-
+#### Rough Prototype
 
 [▶ Rough prototype video](media/partD_rough_prototype.mov)
+
 ---
 
 ## Part 2
-
-Following exploration and reflection from Part 1, complete the "looks like," "works like" and "acts like" prototypes for your design, reiterated below.
 
 ---
 
@@ -162,9 +139,8 @@ What changes is that the smaller the hand the easier it stays upright rather tha
 
 <img width="3314" height="2486" alt="IMG_7874" src="media/partE_interaction_diagram.jpg" />
 
-
-
 [▶ Lid Slapper demo video](media/partE_demo.mov)
+
 ---
 
 ### Part F
@@ -190,16 +166,18 @@ Someone walks up to what looks like a normal cookie jar and reaches for the lid.
 
 ### Final Documentation
 
-
 Prototype 1:
 
 [▶ Prototype 1 video](media/partF_prototype1.mov)
+
 Prototype 2:
 
 [▶ Prototype 2 video](media/partF_prototype2.mov)
+
 Prototype 3:
 
 [▶ Prototype 3 video](media/partF_prototype3.mov)
+
 <img width="4284" height="5712" alt="IMG_7871" src="media/partF_final_photo.jpg" />
 
 
