@@ -74,6 +74,9 @@ Distance Test:
 Pi Servo Hat Test:
 
 [▶ Servo test video](media/partC_servo_test.mov)
+https://github.com/user-attachments/assets/c1050344-a5b8-4634-8886-e160c8ab1e0c
+
+
 
 <img width="204" height="153" alt="Screenshot 2026-10-18 at 9 10 31 PM" src="media/partC_servo_screenshot.png" />
 
@@ -110,6 +113,10 @@ We chose this because first off, the capacitive touch on the lid is the most dir
 
 [▶ Rough prototype video](media/partD_rough_prototype.mov)
 
+https://github.com/user-attachments/assets/0f6227e5-fb5c-4058-a73d-d29ca764ee2d
+
+
+
 ---
 
 ## Part 2
@@ -140,6 +147,8 @@ What changes is that the smaller the hand the easier it stays upright rather tha
 <img width="3314" height="2486" alt="IMG_7874" src="media/partE_interaction_diagram.jpg" />
 
 [▶ Lid Slapper demo video](media/partE_demo.mov)
+https://github.com/user-attachments/assets/f7cb4be7-61a9-4b04-9601-84aacb88ac08
+
 
 #### Reflection
 
@@ -174,13 +183,26 @@ Prototype 1:
 
 [▶ Prototype 1 video](media/partF_prototype1.mov)
 
+https://github.com/user-attachments/assets/aa66ecaa-af2f-425f-a0b5-2ca3e5dfdfb7
+
+
 Prototype 2:
 
 [▶ Prototype 2 video](media/partF_prototype2.mov)
 
+https://github.com/user-attachments/assets/b9fd525d-09a9-478c-9d07-0bf1d5ee08cd
+
+
+
 Prototype 3:
 
 [▶ Prototype 3 video](media/partF_prototype3.mov)
+
+https://github.com/user-attachments/assets/aba7e2db-6f55-4aeb-b81a-49c7455efde2
+
+
+
+
 
 <img width="4284" height="5712" alt="IMG_7871" src="media/partF_final_photo.jpg" />
 
