@@ -10,6 +10,10 @@ few readings, and only changes are logged, so a quiet night is a short file:
     gone        it left the frame (picked up)
     back        it returned
     dark        too dark to see anything; absence is NOT counted as a drink
+    light       light back on and nothing changed since before the dark
+
+After a dark stretch the bottle is compared with where it was before the dark,
+so a bottle picked up or moved with the lamp on still reads as gone or moved.
 
 The hand-off is silent: when the room goes dark for half a minute, the night
 has started. The device acknowledges by turning its green LED off rather than
@@ -95,7 +99,9 @@ def look(frame):
     return "gone", None, None, brightness, 0.0
 
 
-state, last_center, last_beat = None, None, 0.0
+# known: what we last SAW (present/gone). in_dark is tracked separately, so the
+# darkness doesn't erase where the bottle was before the lights went off.
+known, in_dark, last_center, last_beat = None, False, None, 0.0
 dark_since, night_started = None, False
 led(True)
 print("water watch started, Ctrl-C to stop", flush=True)
@@ -123,25 +129,30 @@ while True:
             dark_since = None
 
         # The interpreter's state machine.
+        # When the light comes back, compare with what we saw before the dark,
+        # so a bottle picked up or moved in the dark still counts.
         event = None
-        if reading == "present":
-            if state == "gone":
-                event = "back"
-            elif state == "present" and last_center and \
-                    math.dist(center, last_center) > args.move:
-                event = "moved"
-            elif state in (None, "dark"):
-                event = "present"
-            last_center = center
-            state = "present"
-        elif reading == "gone":
-            if state == "present":
-                event = "gone"
-            state = "gone"
-        else:  # dark: we can't see; don't change what we believe about the bottle
-            if state != "dark":
+        if reading == "dark":       # we can't see; keep what we believe about the bottle
+            if not in_dark:
                 event = "dark"
-            state = "dark"
+            in_dark = True
+        else:
+            was_dark, in_dark = in_dark, False
+            if reading == "present":
+                if known == "gone":
+                    event = "back"
+                elif known == "present" and last_center and \
+                        math.dist(center, last_center) > args.move:
+                    event = "moved"
+                elif known is None:
+                    event = "present"
+                last_center = center
+            elif known == "present":
+                event = "gone"
+            known = reading
+            if was_dark and event is None:
+                event = "light"     # lights back on, nothing changed; closes the dark stretch
+        state = "dark" if in_dark else known
 
         if event:
             entry = {"t": ts, "reading": event, "light": round(brightness, 1)}

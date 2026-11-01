@@ -68,7 +68,10 @@ hours = (night_end - night_start).total_seconds() / 3600
 times = [r.strftime("%-I:%M") for r in reaches]
 
 # The honest version, written by code.
-if not reaches:
+if not reaches and dark_minutes >= 5:
+    # It was dark, so "never moved" would be a guess. Say what it actually saw.
+    line = f"No reaches seen between {night_start:%-I:%M} and {night_end:%-I:%M}."
+elif not reaches:
     line = f"The bottle never moved between {night_start:%-I:%M} and {night_end:%-I:%M}."
 elif len(reaches) == 1:
     line = f"You reached for the water once, at {times[0]}."
