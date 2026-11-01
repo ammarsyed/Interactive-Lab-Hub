@@ -68,76 +68,24 @@ This readme.md page in your own repository should be edited to include the work 
 
 # Part 1
 
-## Part A. 
-### Set up your Pi for on-device AI
+## Part A.
+### Set up the Pi for on-device AI
 
-Create a virtual environment and install the requirements. They include `ultralytics` (YOLO), which pulls in torch, so this takes a while:
-
-```
-pi@raspberrypi:~$ cd Interactive-Lab-Hub/Lab\ 5
-pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ python3 -m venv .venv
-pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ source .venv/bin/activate
-(.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ pip install -r requirements.txt
-```
-
-As in Lab 3, [`uv`](https://docs.astral.sh/uv/) is a much faster drop-in for `pip`: `pip install uv && uv pip install -r requirements.txt`.
-
-### YOLO: download the nano model and export it for the Pi
-
-We use the nano model of [YOLO26](https://docs.ultralytics.com/models/yolo26/), exported once to NCNN, the format that runs fastest on the Pi. This downloads the weights:
+Created a venv in `Lab 5`, installed `requirements.txt` (torch and ultralytics make this the long step), and exported the YOLO26 nano model to NCNN:
 
 ```
-(.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ python -c "from ultralytics import YOLO; YOLO('yolo26n.pt').export(format='ncnn')"
-(.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ yolo export model=yolo26n.pt format=ncnn
-```
-If every ultralytics message is followed by a `--- Logging error ---` traceback ending in `UnicodeEncodeError: 'latin-1' codec can't encode character`, fix your shell's locale once::
-
-```
-echo 'export LANG=C.UTF-8' >> ~/.bashrc
-echo 'export LC_ALL=C.UTF-8' >> ~/.bashrc
-echo 'export PYTHONIOENCODING=utf-8' >> ~/.bashrc
-source ~/.bashrc
+python3 -m venv .venv && source .venv/bin/activate
+pip install uv && uv pip install -r requirements.txt
+yolo export model=yolo26n.pt format=ncnn
 ```
 
-The second command converts the .pt model to a .ncnn model.
+Checked the export on the sample image. It found 4 people and the bus in about 155 ms per frame:
 
-Test it on an image from the internet. `project="$PWD"` keeps the output in `predict` in the current lab folder; without it, ultralytics writes to a `runs/` folder at the top of your git repo, where you will not think to look.
+![YOLO bus test](images/yolo-bus.jpg)
 
-```
-(.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ yolo predict model=yolo26n_ncnn_model source=https://ultralytics.com/images/bus.jpg project="$PWD"
-```
+Installed Ollama and pulled the two Qwen models, `qwen3.5:0.8b` (text and images) and `qwen3:0.6b` (text only).
 
-The result is in `predict/bus.jpg`: boxes around the people and the bus.
-
-Now a photo of your own. Plug in the webcam and take one with `snap.py` (`--delay 3` gives you three seconds to get into the frame), or choose any picture you downloaded from the internet and put under this folder. Put your selected picture after the `source=` Then run the same command on it:
-
-```
-(.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ python snap.py --delay 3
-(.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ yolo predict model=yolo26n_ncnn_model source=snap.jpg project=runs
-```
-
-Every run gets its own numbered folder, so this one is in `runs/predict2/snap.jpg`; the command prints where it saved. Keep `snap.jpg`, you will show it to Qwen in Part D.
-
-### Ollama: install it and pull Qwen
-
-[Ollama](https://ollama.com) runs language models locally. Nothing leaves the Pi: no API key, no internet after the download.
-
-```
-pi@raspberrypi:~ $ curl -fsSL https://ollama.com/install.sh | sh
-pi@raspberrypi:~ $ ollama pull qwen3.5:0.8b
-pi@raspberrypi:~ $ ollama pull qwen3:0.6b
-pi@raspberrypi:~ $ ollama list
-```
-
-| model | download | what it does |
-|---|---|---|
-| `qwen3.5:0.8b` | ~1.3 GB | text **and images**; the one we use in this lab |
-| `qwen3:0.6b` | ~0.5 GB | text only, smaller and faster (~16 tokens/s on a Pi 5) |
-
-\*\*\***Include a screenshot of `ollama list` showing your models.**\*\*\*
-
-![ollama list on the Pi](images/ollama-list.png)
-
+*(screenshot of `ollama list`)*
 
 ## Part B. 
 ### See: recognize people in real time with YOLO
@@ -259,12 +207,9 @@ A 0.8B model is slow and sometimes wrong. It will invent events that are not in 
 
 \*\*\***Ask Qwen three questions to answer. Paste the questions, the answers and how long each took. Try one of them with `qwen3:0.6b` and compare.**\*\*\*
 
-| Question | Model | Answer | Time |
-|---|---|---|---|
-| Tell me a bit about the history of Roosevelt Island. | qwen3.5:0.8b | Roosevelt Island was originally built as a private residence by John Quincy Adams, who named it after his wife's maiden name. It became an important political landmark for the United States and served as a meeting place for various influential figures during the 19th century. Today, it is a historic site where visitors can see the original house and explore its rich history. | 38.4 s |
-| Tell me a bit about the history of Roosevelt Island. | qwen3:0.6b | Roosevelt Island is a remote island in the Pacific Ocean, located in the central Pacific. It was once a vital part of the United States' Pacific Northwest, and it played a significant role in the development of the region. The island was established in the 19th century as a military base for the U.S. Navy, and it became a symbol of the nation's presence in the Pacific. Today, it remains a peaceful and important part of the region, with a rich history and cultural significance. | 16.3 s |
-| What is in this photo? (`bus.jpg`) | qwen3.5:0.8b | This photo shows a blue and white public bus with the route number 10, parked on a city street. Several people are walking around the bus, including one man in a beige coat standing near the front door of the vehicle. The setting appears to be an urban environment during daytime. | 135.1 s |
-| Someone was at the door at 3 am. Is that unusual? (`--json`) | qwen3.5:0.8b | `{"headline": "Unusual: Someone at door at 3 AM", "unusual": true}` | 9.4 s |
+<details>
+  Q&A here
+</details>
 
 
 ## Part E. 
