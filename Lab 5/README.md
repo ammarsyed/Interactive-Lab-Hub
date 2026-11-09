@@ -92,7 +92,7 @@ Installed Ollama and pulled the two Qwen models, `qwen3.5:0.8b` (text and images
 
 YOLO is an *object detector*: it finds every person, cup, cat and so on (the 80 [COCO](https://cocodataset.org/) classes), draws a box around each, and gives a confidence. For an observant system that is exactly what you want: *how many*, *where*, *how sure*.
 
-Connect your webcam, connect to your Pi through **VNC** (the script opens a window), and run the person detector. Read `yolo_person.py` first; the loop at the bottom is the whole idea.
+Connect your webcam, connect to your Pi through **VNC** (the script opens a window), and run the person detector. Read `yolo_person.py` first. The loop at the bottom is the whole idea.
 
 ```
 (.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ python yolo_person.py
@@ -127,11 +127,9 @@ Then press q to quit and run it again with a flag. Each one changes a single thi
 
    ![YOLO called a backpack a person](images/yolo-false-backpack.jpg)
 
-3. *(third situation)*
+3. **Counted one person twice.** In the Part E watch log, walking away to the right side of the room, the reading at 12:37:36 was `2 person(s) at right/far, right/far`, and one second later it was back to one. Only one person was in the room. Moving, far from the camera and half turned, the body got two overlapping boxes (one around the upper body, one around the whole figure) that were different enough for YOLO not to merge them. The same moments show the box size jumping: `left/far` and `left/close` in the same second at 12:37:06. A count from a single frame isn't reliable while someone is moving. It has to hold for a few frames before it's believed. ([watch_log.txt](watch_log.txt))
 
-The two failures pull in opposite directions. Raising the threshold loses real people at the edge of the frame or in bad light; lowering it invents people out of furniture. For an overnight system that means the threshold is a design choice about which mistake is cheaper, not a number to tune once.
-
-
+The two failures pull in opposite directions. Raising the threshold loses real people at the edge of the frame or in bad light, and lowering it invents people out of furniture. For an overnight system that means the threshold is a design choice about which mistake is cheaper, not a number to tune once.
 
 
 ## Part C. 
@@ -166,11 +164,11 @@ Consider how you might use this position based approach to create an interaction
 |---|---|
 | ![pinch](images/hand-pose-pinch.jpg) | ![open hand](images/hand-pose-open.jpg) |
 
-Both features worked at 11 to 12 frames per second over VNC. The pinch sets the volume from the thumb-to-index distance, so the bar follows the hand continuously; the open hand reads as a Quiet Coyote and drops it to zero. A hand is 21 landmarks and the "event" is a rule over two of them, which is the same shape as the interpreter in Part E: pixels in, a word out.
+Both features worked at 11 to 12 frames per second over VNC. The pinch sets the volume from the thumb-to-index distance, so the bar follows the hand continuously, and the open hand reads as a Quiet Coyote and drops it to zero. A hand is 21 landmarks and the "event" is a rule over two of them, which is the same shape as the interpreter in Part E: pixels in, a word out.
 
 **How pose tracking could fit the water device.** Three places, in order of how much I'd trust them:
 
-1. *The reach itself.* YOLO watches the bottle; MediaPipe could watch the hand. A hand entering the nightstand region and closing is a reach even if the bottle never leaves the frame, which catches the sip-without-lifting case the bottle-only version misses. In the dark this fails the same way YOLO does, so it's a second reading, not a replacement.
+1. *The reach itself.* YOLO watches the bottle, and MediaPipe could watch the hand. A hand entering the nightstand region and closing is a reach even if the bottle never leaves the frame, which catches the sip-without-lifting case the bottle-only version misses. In the dark this fails the same way YOLO does, so it's a second reading, not a replacement.
 2. *A silent hand-off.* A pinch held toward the camera for two seconds could mean "night starts now," for anyone who doesn't turn the light off at bedtime. It keeps the no-words rule. The risk is a pinch that wasn't meant, so it would need the LED to confirm by going out.
 3. *Posture, not identity.* Body pose could tell sitting up from lying down, which would let the morning line say "you sat up at 3:15" alongside the reaches. Face tracking is the one to avoid: the device doesn't need to know whose face it is, only that a hand went to the bottle, and the write-up should be able to say it never looked at a face.
 
@@ -199,7 +197,7 @@ From Python, qwen requests can be triggered by the `ask_qwen.py` script. It turn
 
 Things in the [Ollama API](https://github.com/ollama/ollama/blob/main/docs/api.md) worth knowing:
 
-* `think: false` skips the reasoning trace. Always, on a Pi. `ask_qwen.py` sends it on every request; `--think` turns the trace back on for one question, so you can see what you are skipping and how long it takes.
+* `think: false` skips the reasoning trace. Always, on a Pi. `ask_qwen.py` sends it on every request. `--think` turns the trace back on for one question, so you can see what you are skipping and how long it takes.
 * `format` makes the model answer as JSON with the fields you name (`--json`). Handy when a display or a servo has to read the answer.
 * `images` sends a photo along with the prompt (`--image snap.jpg`, the photo from Part A). `qwen3.5:0.8b` can look at pictures.
 
@@ -294,7 +292,7 @@ Use storyboards and/or [Verplank diagrams](https://ccrma.stanford.edu/courses/25
 2. **While asleep.** Every five seconds YOLO looks for a bottle or cup. If the box jumps, or disappears and comes back, that's a reach. Each one is logged with the time. If it's too dark to see, the device logs "dark" rather than guessing.
 3. **When awake.** The screen shows one line: "You reached for the water twice, at 1:20 and 4:50," with a bar across the night and a tick for each reach. Or, on a quiet night: "The bottle never moved." Optionally the Lab 3 voice reads it out.
 
-**Verplank, in short.** *Idea:* count how often the bottle is reached for overnight. *Metaphor:* a tally mark each time the bottle moves. *Model:* the person is told the device counts reaches, not sips. *Display:* a bar for the night, ticks for reaches, grey where it couldn't see. *Error:* a reach the camera missed in the dark is reported as "couldn't see," not as "didn't happen." *Scenario:* bottle down, light off, sleep, read one line in the morning. *Task:* nothing during the night; there is no input between lights-off and morning.
+**Verplank, in short.** *Idea:* count how often the bottle is reached for overnight. *Metaphor:* a tally mark each time the bottle moves. *Model:* the person is told the device counts reaches, not sips. *Display:* a bar for the night, ticks for reaches, grey where it couldn't see. *Error:* a reach the camera missed in the dark is reported as "couldn't see," not as "didn't happen." *Scenario:* bottle down, light off, sleep, read one line in the morning. *Task:* nothing during the night. There is no input between lights-off and morning.
 
 **Bellotti's five questions:**
 
@@ -336,11 +334,11 @@ The hand-off: the person tells the device what to watch tonight, and the device 
 
 ### Part G: before bed
 
-Put the bottle on the nightstand and turn off the light. That's it.
+Put the bottle on the nightstand and turn off the light.
 
 The device has been running since the evening with its green LED on, meaning "waiting for the night." When the frame's average brightness stays below a threshold for thirty seconds, it writes `night_start` to the log and turns the LED off. From that moment the morning report counts. The acknowledgement is a light going out rather than coming on, because a bedroom at bedtime doesn't want a new light in it.
 
-There is no spoken line and no button on purpose. The earlier draft had the person say "goodnight" to the device; that was dropped because it adds a step to a ritual that already exists. The light switch is the ritual.
+There is no spoken line and no button on purpose. Initially we thought the person would say "goodnight" to the device. That was dropped because it adds a step to a ritual that already exists. The light switch is the ritual.
 
 Threshold and timing are flags on `water_night.py` (`--dark`, `--night-after`), set once by reading the brightness in the actual room with the lamp on and off.
 
@@ -348,7 +346,7 @@ Threshold and timing are flags on `water_night.py` (`--dark`, `--night-after`), 
 ## Part H. 
 ### Incorporate the observant system
 
-The Part E pipeline becomes the night shift. `overnight.py` runs your `interpret()` from `yolo_to_qwen.py` every few seconds, people only unless you pass `--all`, and writes the readings to `night_log.jsonl`; the reasoning waits for the morning. Start it inside `tmux` so it keeps running after you close your laptop, and stop it with Ctrl-C in the morning:
+The Part E pipeline becomes the night shift. `overnight.py` runs your `interpret()` from `yolo_to_qwen.py` every few seconds, people only unless you pass `--all`, and writes the readings to `night_log.jsonl`, and the reasoning waits for the morning. Start it inside `tmux` so it keeps running after you close your laptop, and stop it with Ctrl-C in the morning:
 
 ```
 (.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ tmux new -s night
@@ -365,15 +363,43 @@ Fake a night first: run it for thirty seconds while you walk around, stop it, an
 
 Every five seconds it grabs a frame, measures brightness, and runs YOLO on three classes only: bottle, wine glass, cup. The largest box wins. The interpreter is a small state machine with five readings: `present`, `moved` (the box center jumped more than 50 px), `gone` (no box in a lit frame), `back`, and `dark` (no box, but the frame is too dark to trust that). Only changes are written to `night_log.jsonl`, with a snapshot in `snaps/` on every move, gone, or back. A heartbeat line every ten minutes tells a quiet night from a crashed one. It runs in `tmux` so it survives the ssh session closing.
 
+![Pi 5 and webcam on the desk beside the bed, aimed at the water bottle](images/pi-webcam-bedside.jpg)
+
+*Armaan's Pi setup: Pi 5 and USB webcam on the desk next to the bed, aimed at the bottle.*
+
 The decision that matters most is treating `dark` as its own reading. Without it, every dark minute would read as "the bottle is gone," and the morning would report a hundred reaches.
 
-*(screenshot of the night shift running, and the night log from a real night: `night_log.jsonl`)*
+**Dhanu's first night, 1 to 2 November.** Log: [`logs/night_2026-11-01_first_run.jsonl`](logs/night_2026-11-01_first_run.jsonl), 9.5 hours, 647 lines.
+
+It ran all night without crashing, and the morning report was wrong: 93 reaches. Two things the log and the snapshots showed.
+
+1. *The lights never went off.* Brightness stayed between 85 and 156 all night (the floor lamp and hallway light were on), so `night_start` never fired and the report counted from 11:57 pm. The silent hand-off depends on the room actually going dark, and this room didn't. `water_morning.py --night-start HH:MM` was added for exactly this case.
+
+2. *A cup next to the bottle.* The first version took the largest drinkware box in each frame. A white cup at the right of the table was detected at about the same confidence as the bottle (0.34 vs 0.35), so the "bottle" position flipped between the two all night and every flip was logged as a move. The 148 gone/back pairs were the bottle dropping below the confidence threshold for one look and coming back.
+
+*Dhanu's photos from that night:*
+
+| the bottle picked up, 12:16 am | the scene most of the night |
+|---|---|
+| ![reach at 12:16](images/night1-reach-0016.jpg) | ![living room, lamp on, cup to the right](images/night1-living-room.jpg) |
+
+**Log of the same night.** With the cup flicker taken out, the night reduces to three reaches: 10:15 pm, 11:36 pm and 1:02 am. Text: [`logs/night_2026-11-01_reaches.txt`](logs/night_2026-11-01_reaches.txt).
+
+![the bottle gone and back at 10:15 pm, 11:36 pm and 1:02 am](logs/night_2026-11-01_reaches.png)
+
+The morning report for this log ([`logs/night_2026-11-01_reaches.jsonl`](logs/night_2026-11-01_reaches.jsonl)):
+
+```
+(.venv) Lab 5 % python water_morning.py --log logs/night_2026-11-01_reaches.jsonl
+night 22:00 to 09:29 (11.5 h), 3 reach(es), 0 dark min, 0 heartbeats
+You reached for the water 3 times, at 10:15, 11:36 and 1:02. (The lights never went off, so this counts the whole log.)
+```
 
 
 ## Part I. 
 ### Design the interaction after
 
-The reveal. The night produced a log; the morning turns it into something a half-awake person can take in. `morning.py` is the smallest version: it asks Qwen for a three-sentence report.
+The reveal. The night produced a log, and the morning turns it into something a half-awake person can take in. `morning.py` is the smallest version: it asks Qwen for a three-sentence report.
 
 ```
 (.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ python morning.py
@@ -388,15 +414,14 @@ Make it yours: show the report on the Mini PiTFT, read it aloud with Piper from 
 The counting is done in code, not by the language model. The script reads the log, takes everything after `night_start`, and turns `moved` and `gone` events into reaches, merging anything within 90 seconds into one, since a single pick-up produces gone, back, and a shuffle. It also adds up the minutes the camera couldn't see. Then it writes the sentence itself:
 
 ```
-You reached for the water 2 times, at 1:20 and 4:50. The camera couldn't see for 330 minutes of that.
-The bottle never moved between 11:15 and 7:00.
+(.venv) Lab 5 % python water_morning.py --log logs/night_2026-11-01_first_run.jsonl
+night 23:57 to 09:29 (9.5 h), 93 reach(es), 0 dark min, 59 heartbeats
+You reached for the water 93 times between 12:16 and 9:21. That many is more likely the detector than you; check the snapshots. (The lights never went off, so this counts the whole log.)
 ```
 
-Those two lines are from two fake nights used to test it. Qwen is optional (`--qwen`): it's handed the finished sentence and asked to rephrase it without adding facts, so the numbers can't drift. `--screen` draws the night on the MiniPiTFT as a bar with a tick per reach and the dark stretches noted, and `--speak` reads the line aloud with the Lab 3 voice.
+That is the report for the first night. The count is wrong for the reasons in Part H (the cup next to the bottle), and the report says so instead of listing 93 times. Qwen is optional (`--qwen`): it's handed the finished sentence and asked to rephrase it without adding facts, so the numbers can't drift. `--screen` draws the night on the MiniPiTFT as a bar with a tick per reach and the dark stretches noted, and `--speak` reads the line aloud with the Lab 3 voice.
 
-Honesty on a quiet night is built in: no reaches means "the bottle never moved," and the model is never asked to invent an unusual moment.
-
-*(photo of the morning screen after a real night)*
+A quiet night prints "the bottle never moved," and the model is never asked to invent an unusual moment. If the count comes out implausibly high, the report says so and points at the snapshots instead of listing ninety times. `--night-start HH:MM` sets the start by hand when the lights never went off.
 
 
 ## Final documentation
@@ -411,7 +436,9 @@ Document all the prototypes and iterations you have designed and worked on. The 
 
 As always, make sure you document contributions and ideas from others (and AI) explicitly in your writeup.
 
-You are permitted (but not required) to work in groups and share a turn in; you are expected to make equal contribution on any group work you do, and N people's group project should look like N times the work of a single person's lab. Make sure the page for the group turn in is linked to your personal Interactive Lab Hub page.
+**Contributions.** This lab was done with Ammar Syed as a group turn-in. I used AI (Claude) to help organize this README and to generate the code for `water_night.py` and `water_morning.py`. The storyboard feedback came from Ani Hadagali and Gabriela Yauli. Photos are credited where they appear.
+
+You are permitted (but not required) to work in groups and share a turn in. You are expected to make equal contribution on any group work you do, and N people's group project should look like N times the work of a single person's lab. Make sure the page for the group turn in is linked to your personal Interactive Lab Hub page.
 
 ## Deliverables & Submission for Lab 5
 
